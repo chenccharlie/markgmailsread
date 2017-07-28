@@ -1,0 +1,57 @@
+<!-- Load the jQuery and jQuery UI libraries. -->
+<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+<!-- Custom client-side JavaScript code. -->
+<script>
+  // When the page loads.
+  $(function() {
+    $('#mark_read').bind('submit', onMarkReadFormSubmit);
+  });
+  
+  /**
+   * A callback function that runs when the new task form is submitted.
+   */
+  function onMarkReadFormSubmit() {
+    var labelNameBox = $('#label_name');
+    var labelName = labelNameBox.val().trim();
+    if (labelName == "") {
+      return false;
+    }
+    var statusSpan = $('#status');
+    var runButton = $('#run_button');
+    statusSpan.text('Running...');
+    runButton.prop('disabled', true);
+    
+    var queryTask = setInterval(queryStatus, 2000, labelName);
+    google.script.run
+        .withSuccessHandler(function() {
+          clearInterval(queryTask);
+          labelNameBox.val('');
+          labelNameBox.effect("highlight", {
+            duration: 1500
+          });
+          statusSpan.text('Succeeded!');
+          runButton.prop('disabled', false);
+        })
+        .withFailureHandler(function showError(error) {
+          clearInterval(queryTask);
+          console.log(error);
+          statusSpan.text('Failed!');
+          runButton.prop('disabled', false);
+          window.alert('An error has occurred, please try again.');
+        })
+        .markRead(labelName);
+
+    return false;
+  }
+  
+  function queryStatus(labelName) {
+    var statusSpan = $('#status');
+    google.script.run
+        .withSuccessHandler(function(threads) {
+          statusSpan.text('Running... ' + threads.length + ' unread threads remaining...');
+        })
+        .getUnreadThreads(labelName);
+  }
+</script>
