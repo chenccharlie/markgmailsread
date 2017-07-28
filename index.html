@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <?!= HtmlService.createHtmlOutputFromFile('Stylesheet').getContent(); ?>
+</head>
+<body>
+
+<h1>Mark All Gmail Read</h1>
+<p>
+  This application allows you to mark your Gmails as read in one click.
+</p>
+
+<form name="mark_read" id="mark_read">
+  <label for="label_name">Enter the <b>label</b> you want to mark as read, or enter <b>*</b> to mark <b>all</b>:</label>
+  <input type="text" name="label_name" id="label_name" />
+  <input type="submit" name="run_button" id="run_button" value="Run" />
+</form>
+
+<span>Status: </span><span name="status" id="status">Not Started</span> 
+
+<?!= HtmlService.createHtmlOutputFromFile('JavaScript').getContent(); ?>
+
+</body>
+</html>
