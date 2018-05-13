@@ -15,8 +15,11 @@
   <input type="text" name="label_name" id="label_name" />
   <input type="submit" name="run_button" id="run_button" value="Run" />
 </form>
+<br/>
+<span><b>NOTE: use * with caution!</b> It also processes emails which came in while the script is running.</span>
 
-<span>Status: </span><span name="status" id="status">Not Started</span> 
+<br/>
+<span>Status: </span><span name="status" id="status">Not Started</span>
 
 <?!= HtmlService.createHtmlOutputFromFile('JavaScript').getContent(); ?>
 

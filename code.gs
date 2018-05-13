@@ -11,7 +11,9 @@ function doGet() {
 function markRead(label) {
   var threads = getUnreadThreads(label);
   while (threads.length > 0) {
-    GmailApp.markThreadsRead(threads.slice(0, 100));
+    for (var i = 0; i < threads.length / 100; i++) {
+      GmailApp.markThreadsRead(threads.slice(i * 100, (i+1) * 100));
+    }
     threads = getUnreadThreads(label);
   }
 }
