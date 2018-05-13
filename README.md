@@ -1,6 +1,6 @@
 # Mark Gmails Read
-Google Web App to Easily Mark All Gmails as Read
-https://chrome.google.com/webstore/detail/mark-all-gmail-read/ckjffidefnfgefckeglebomnglahaklb
+Google Web App to Easily Mark All Gmails as Read (
+https://chrome.google.com/webstore/detail/mark-all-gmail-read/ckjffidefnfgefckeglebomnglahaklb)
 
 # Usage
 ## Intro
