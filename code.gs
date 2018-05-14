@@ -7,12 +7,19 @@ function doGet() {
 /**
  * Marks Gmails under the label to be read.
  * @param {String} label The label to be marked as read.
+ * @param {Boolean} whether to reverse the marking.
  */
-function markRead(label) {
+function markRead(label, reverseOption) {
   var threads = getUnreadThreads(label);
   while (threads.length > 0) {
-    for (var i = 0; i < threads.length / 100; i++) {
-      GmailApp.markThreadsRead(threads.slice(i * 100, (i+1) * 100));
+    if (reverseOption) {
+      for (var i = (threads.length - 1) / 100; i >= 0; i--) {
+        GmailApp.markThreadsRead(threads.slice(i * 100, (i+1) * 100));
+      }
+    } else {
+      for (var i = 0; i < threads.length / 100; i++) {
+        GmailApp.markThreadsRead(threads.slice(i * 100, (i+1) * 100));
+      }
     }
     threads = getUnreadThreads(label);
   }

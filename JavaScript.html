@@ -18,6 +18,9 @@
     if (labelName == "") {
       return false;
     }
+    var reverseOption = $('#reverse_option');
+    alert(reverseOption.attr('checked'));
+
     var statusSpan = $('#status');
     var runButton = $('#run_button');
     statusSpan.text('Running...');
@@ -41,7 +44,7 @@
           runButton.prop('disabled', false);
           window.alert('An error has occurred, please try again.');
         })
-        .markRead(labelName);
+        .markRead(labelName, reverseOption.attr('checked'));
 
     return false;
   }
